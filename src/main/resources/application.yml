@@ -2,35 +2,27 @@ spring:
   application:
     name: scheduled-task
   datasource:
-    url: jdbc:mysql://localhost:3306/scheduled-task?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
-    username: dev
-    password: jIe202uYte6NBm903Xc0363Ndelsrv22V
-    initial-size: 10
-    driver-class-name: com.mysql.jdbc.Driver
-    min-idle: 5
-    max-active: 1000
-    max-wait: 3000
-    remove-abandoned: true
-    remove-abandoned-timeout: 180
-    time-between-eviction-runs-millis: 60000
-    min-evictable-idle-time-millis: 300000
-    validation-query: SELECT 'x' FROM DUAL
-    test-while-idle: true
-    test-on-borrow: false
-    test-on-return: false
-    max-open-prepared-statements: -1
-    pool-prepared-statements: false
-    max-pool-prepared-statement-per-connection-size: -1
-    connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;
-    filters: stat,slf4j,wall
-
+      name: oracle_20210121
+      url: jdbc:oracle:thin:@10.211.95.154:1521/testdba
+      username: citic
+      password: citic
+      # 使用druid数据源
+      type: com.alibaba.druid.pool.DruidDataSource
+      #driver-class-Name: oracle.jdbc.driver.OracleDriver
+      driverClassName: oracle.jdbc.driver.OracleDriver
+      initial-size: 10
+      #driver-class-name: com.mysql.jdbc.Driver
+      min-idle: 5
+      max-active: 1000
+      max-wait: 3000
+      remove-abandoned: true
 auth:
   username: admin
   password: 123456
 
 #registry ceter
 zookeeper:
-  serviceLists: 172.16.5.3:2181,172.16.5.4:2181,172.16.5.5:2181
+  serviceLists: localhost:2181
   namespace: scheduled-task
   baseSleepTimeMilliseconds: 5000
   maxSleepTimeMilliseconds: 5000
