@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cloud.task.mapper.JobExecutionMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.cloud.task.entity.JobExecutionLog">
+        <result column="sid" property="sid"/>
+        <result column="id" property="id"/>
+        <result column="job_name" property="jobName"/>
+        <result column="task_id" property="taskId"/>
+        <result column="hostname" property="hostname"/>
+        <result column="ip" property="ip"/>
+        <result column="sharding_item" property="shardingItem"/>
+        <result column="execution_source" property="executionSource"/>
+        <result column="failure_cause" property="failureCause"/>
+        <result column="is_success" property="isSuccess"/>
+        <result column="complete_time" property="completeTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        sid,
+        id,
+        job_name,
+        task_id,
+        hostname,
+        ip,
+        sharding_item,
+        execution_source,
+        failure_cause,
+        is_success,
+        complete_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO job_execution_log (
+            sid,
+            id,
+            job_name,
+            task_id,
+            hostname,
+            ip,
+            sharding_item,
+            execution_source,
+            failure_cause,
+            is_success,
+            complete_time
+        ) VALUES (
+            #{pojo.sid},
+            #{pojo.id,jdbcType=VARCHAR},
+            #{pojo.jobName},
+            #{pojo.taskId},
+            #{pojo.hostname},
+            #{pojo.ip},
+            #{pojo.shardingItem},
+            #{pojo.executionSource},
+            #{pojo.failureCause},
+            #{pojo.isSuccess},
+            #{pojo.completeTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO job_execution_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.sid!=null"> sid,</if>
+            <if test="pojo.id!=null"> id,</if>
+            <if test="pojo.jobName!=null"> job_name,</if>
+            <if test="pojo.taskId!=null"> task_id,</if>
+            <if test="pojo.hostname!=null"> hostname,</if>
+            <if test="pojo.ip!=null"> ip,</if>
+            <if test="pojo.shardingItem!=null"> sharding_item,</if>
+            <if test="pojo.executionSource!=null"> execution_source,</if>
+            <if test="pojo.failureCause!=null"> failure_cause,</if>
+            <if test="pojo.isSuccess!=null"> is_success,</if>
+            <if test="pojo.completeTime!=null"> complete_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.sid!=null">#{pojo.sid},</if>
+            <if test="pojo.id!=null">#{pojo.id,jdbcType=VARCHAR},</if>
+            <if test="pojo.jobName!=null">#{pojo.jobName},</if>
+            <if test="pojo.taskId!=null">#{pojo.taskId},</if>
+            <if test="pojo.hostname!=null">#{pojo.hostname},</if>
+            <if test="pojo.ip!=null">#{pojo.ip},</if>
+            <if test="pojo.shardingItem!=null">#{pojo.shardingItem},</if>
+            <if test="pojo.executionSource!=null">#{pojo.executionSource},</if>
+            <if test="pojo.failureCause!=null">#{pojo.failureCause},</if>
+            <if test="pojo.isSuccess!=null">#{pojo.isSuccess},</if>
+            <if test="pojo.completeTime!=null">#{pojo.completeTime},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT ALL
+        <foreach collection="pojos" item="pojo">
+            INTO job_execution_log (
+            <include refid="all_column"/>
+            )VALUES(
+                #{pojo.sid},
+                #{pojo.id,jdbcType=VARCHAR},
+                #{pojo.jobName},
+                #{pojo.taskId},
+                #{pojo.hostname},
+                #{pojo.ip},
+                #{pojo.shardingItem},
+                #{pojo.executionSource},
+                #{pojo.failureCause},
+                #{pojo.isSuccess},
+                #{pojo.completeTime}
+            )
+        </foreach>
+        select * from dual
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE job_execution_log
+        <set>
+            <if test="pojo.sid != null"> sid = #{pojo.sid}, </if>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.jobName != null"> job_name = #{pojo.jobName}, </if>
+            <if test="pojo.taskId != null"> task_id = #{pojo.taskId}, </if>
+            <if test="pojo.hostname != null"> hostname = #{pojo.hostname}, </if>
+            <if test="pojo.ip != null"> ip = #{pojo.ip}, </if>
+            <if test="pojo.shardingItem != null"> sharding_item = #{pojo.shardingItem}, </if>
+            <if test="pojo.executionSource != null"> execution_source = #{pojo.executionSource}, </if>
+            <if test="pojo.failureCause != null"> failure_cause = #{pojo.failureCause}, </if>
+            <if test="pojo.isSuccess != null"> is_success = #{pojo.isSuccess}, </if>
+            <if test="pojo.completeTime != null"> complete_time = #{pojo.completeTime} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+</mapper>
+

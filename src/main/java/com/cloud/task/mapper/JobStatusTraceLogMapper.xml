@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cloud.task.mapper.JobStatusTraceMapper">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.cloud.task.entity.JobStatusTraceLog">
+        <result column="sid" property="sid"/>
+        <result column="id" property="id"/>
+        <result column="job_name" property="jobName"/>
+        <result column="original_task_id" property="originalTaskId"/>
+        <result column="task_id" property="taskId"/>
+        <result column="slave_id" property="slaveId"/>
+        <result column="source" property="source"/>
+        <result column="execution_type" property="executionType"/>
+        <result column="sharding_item" property="shardingItem"/>
+        <result column="state" property="state"/>
+        <result column="message" property="message"/>
+        <result column="creation_time" property="creationTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        sid,
+        id,
+        job_name,
+        original_task_id,
+        task_id,
+        slave_id,
+        source,
+        execution_type,
+        sharding_item,
+        state,
+        message,
+        creation_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO job_status_trace_log (
+            sid,
+            id,
+            job_name,
+            original_task_id,
+            task_id,
+            slave_id,
+            source,
+            execution_type,
+            sharding_item,
+            state,
+            message,
+            creation_time
+        ) VALUES (
+            #{pojo.sid},
+            #{pojo.id,jdbcType=VARCHAR},
+            #{pojo.jobName},
+            #{pojo.originalTaskId},
+            #{pojo.taskId},
+            #{pojo.slaveId},
+            #{pojo.source},
+            #{pojo.executionType},
+            #{pojo.shardingItem},
+            #{pojo.state},
+            #{pojo.message},
+            #{pojo.creationTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO job_status_trace_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.sid!=null"> sid,</if>
+            <if test="pojo.id!=null"> id,</if>
+            <if test="pojo.jobName!=null"> job_name,</if>
+            <if test="pojo.originalTaskId!=null"> original_task_id,</if>
+            <if test="pojo.taskId!=null"> task_id,</if>
+            <if test="pojo.slaveId!=null"> slave_id,</if>
+            <if test="pojo.source!=null"> source,</if>
+            <if test="pojo.executionType!=null"> execution_type,</if>
+            <if test="pojo.shardingItem!=null"> sharding_item,</if>
+            <if test="pojo.state!=null"> state,</if>
+            <if test="pojo.message!=null"> message,</if>
+            <if test="pojo.creationTime!=null"> creation_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.sid!=null">#{pojo.sid},</if>
+            <if test="pojo.id!=null">#{pojo.id,jdbcType=VARCHAR},</if>
+            <if test="pojo.jobName!=null">#{pojo.jobName},</if>
+            <if test="pojo.originalTaskId!=null">#{pojo.originalTaskId},</if>
+            <if test="pojo.taskId!=null">#{pojo.taskId},</if>
+            <if test="pojo.slaveId!=null">#{pojo.slaveId},</if>
+            <if test="pojo.source!=null">#{pojo.source},</if>
+            <if test="pojo.executionType!=null">#{pojo.executionType},</if>
+            <if test="pojo.shardingItem!=null">#{pojo.shardingItem},</if>
+            <if test="pojo.state!=null">#{pojo.state},</if>
+            <if test="pojo.message!=null">#{pojo.message},</if>
+            <if test="pojo.creationTime!=null">#{pojo.creationTime},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT ALL
+        <foreach collection="pojos" item="pojo">
+            INTO job_status_trace_log (
+            <include refid="all_column"/>
+            )VALUES(
+                #{pojo.sid},
+                #{pojo.id,jdbcType=VARCHAR},
+                #{pojo.jobName},
+                #{pojo.originalTaskId},
+                #{pojo.taskId},
+                #{pojo.slaveId},
+                #{pojo.source},
+                #{pojo.executionType},
+                #{pojo.shardingItem},
+                #{pojo.state},
+                #{pojo.message},
+                #{pojo.creationTime}
+            )
+        </foreach>
+        select * from dual
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE job_status_trace_log
+        <set>
+            <if test="pojo.sid != null"> sid = #{pojo.sid}, </if>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.jobName != null"> job_name = #{pojo.jobName}, </if>
+            <if test="pojo.originalTaskId != null"> original_task_id = #{pojo.originalTaskId}, </if>
+            <if test="pojo.taskId != null"> task_id = #{pojo.taskId}, </if>
+            <if test="pojo.slaveId != null"> slave_id = #{pojo.slaveId}, </if>
+            <if test="pojo.source != null"> source = #{pojo.source}, </if>
+            <if test="pojo.executionType != null"> execution_type = #{pojo.executionType}, </if>
+            <if test="pojo.shardingItem != null"> sharding_item = #{pojo.shardingItem}, </if>
+            <if test="pojo.state != null"> state = #{pojo.state}, </if>
+            <if test="pojo.message != null"> message = #{pojo.message}, </if>
+            <if test="pojo.creationTime != null"> creation_time = #{pojo.creationTime} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+</mapper>
+
