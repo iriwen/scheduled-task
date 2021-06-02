@@ -13,6 +13,10 @@ import com.dangdang.ddframe.job.event.rdb.JobEventRdbIdentity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  *〈job event 数据库配置〉<br> 
@@ -23,18 +27,22 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Getter
-public final class JobEventRdbConfiguration extends JobEventRdbIdentity implements JobEventConfiguration, Serializable {
+@Configuration
+@Qualifier("defaultJobEventConfiguration")
+public  class JobEventRdbConfiguration extends JobEventRdbIdentity implements JobEventConfiguration, Serializable {
 
     private static final long serialVersionUID = 3344410699286435226L;
 
-    private final transient DataSource dataSource;
+    @Autowired
+    JobEventRdbListener  jobEventRdbListener;
 
     @Override
     public JobEventListener createJobEventListener() throws JobEventListenerConfigurationException {
-        try {
-            return new JobEventRdbListener(dataSource);
-        } catch (final SQLException ex) {
+       // try {
+            //return new JobEventRdbListener(dataSource);
+        return jobEventRdbListener;
+       /* } catch (SQLException ex) {
             throw new JobEventListenerConfigurationException(ex);
-        }
+        }*/
     }
 }

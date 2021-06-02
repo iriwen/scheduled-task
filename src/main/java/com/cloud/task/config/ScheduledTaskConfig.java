@@ -26,10 +26,10 @@ public class ScheduledTaskConfig {
      *
      * @return
      */
-    @Bean("defaultJobEventConfiguration")
+    /*@Bean("defaultJobEventConfiguration")
     public JobEventConfiguration jobEventConfiguration(DataSource dataSource) {
         return new JobEventRdbConfiguration(dataSource);
-    }
+    }*/
 
     @Bean("defaultElasticJobListener")
     public ElasticJobListener elasticJobListener() {

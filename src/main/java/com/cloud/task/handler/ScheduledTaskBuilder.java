@@ -63,6 +63,7 @@ public class ScheduledTaskBuilder {
 
     public SpringJobScheduler buildScheduledTask(final ElasticJob elasticJob, final LiteJobConfiguration jobConfig,
         JobEventConfiguration jobEventRdbConfiguration, List<ElasticJobListener> elasticJobListeners) {
+
         if (!elasticJobListeners.contains(this.elasticJobListener)) {
             elasticJobListeners.add(this.elasticJobListener);
         }
@@ -78,6 +79,7 @@ public class ScheduledTaskBuilder {
         ElasticJobListener[] elasticJobListenersArray = new ElasticJobListener[elasticJobListeners.size()];
         SpringJobScheduler springJobScheduler = new SpringJobScheduler(elasticJob, registryCenter, jobConfig,
             jobEventRdbConfiguration, elasticJobListeners.toArray(elasticJobListenersArray));
+
         schedulerMap.put(jobConfig.getJobName(), new SpringJobSchedulerFacade(jobConfig, springJobScheduler,
             new ServerService(registryCenter, jobConfig.getJobName())));
         return springJobScheduler;

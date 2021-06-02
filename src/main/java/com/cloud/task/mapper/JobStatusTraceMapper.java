@@ -15,4 +15,6 @@ public interface JobStatusTraceMapper {
     int insertList(@Param("pojos") List<JobStatusTraceLog> pojo);
 
     int update(@Param("pojo") JobStatusTraceLog pojo);
+
+    String selectOriginalTaskId(@Param("taskId")String taskId,@Param("state") String state);
 }
