@@ -11,6 +11,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import javax.sql.DataSource;
 
+import com.cloud.task.mapper.JobExecutionLogMapper;
+import com.cloud.task.mapper.JobStatusTraceLogMapper;
 import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,13 +40,17 @@ import lombok.extern.slf4j.Slf4j;
 public class ScheduledTaskMonitor implements ApplicationListener<ApplicationStartedEvent> {
 
     private static String QUERY_JOB_STATUS_SQL =
-        "select id, job_name, task_id, sharding_item, state, message, creation_time from job_status_trace_log where job_name = ? and creation_time between ? and ? limit 1";
+        "select id, job_name, task_id, sharding_item, state, message, creation_time from JOB_STATUS_TRACE_LOG where job_name = ? and creation_time between ? and ? limit 1";
 
     @Autowired
     private ScheduledTaskBuilder scheduledTaskBuilder;
+    //@Autowired
+    //private DataSource dataSource;
+    @Autowired
+    private JobExecutionLogMapper  executionLogMapper ;
 
     @Autowired
-    private DataSource dataSource;
+    private JobStatusTraceLogMapper statusTraceLogMapper ;
 
     @Value("${scheduledTask.monitor.enable:false}")
     private Boolean scheduledTaskMonitorEnabled;
@@ -55,7 +61,7 @@ public class ScheduledTaskMonitor implements ApplicationListener<ApplicationStar
     @Value("${scheduledTask.monitor.time.interval:3}")
     private int timeBetweenMonitorInterval;
 
-    private JdbcTemplate jdbcTemplate;
+    //private JdbcTemplate jdbcTemplate;
 
     /**
      * 上次监控时间
@@ -70,7 +76,7 @@ public class ScheduledTaskMonitor implements ApplicationListener<ApplicationStar
 
         lastMonitorTime = new AtomicLong(System.currentTimeMillis());
         executorService = Executors.newSingleThreadScheduledExecutor(new DaemonThreadFactory("ScheduledTaskMonitor"));
-        jdbcTemplate = new JdbcTemplate(dataSource);
+        //jdbcTemplate = new JdbcTemplate(dataSource);
 
         executorService.scheduleAtFixedRate(() -> {
             Date thisMonitorDate = new Date();
@@ -108,9 +114,10 @@ public class ScheduledTaskMonitor implements ApplicationListener<ApplicationStar
      * @return
      */
     private int findJobStatusTraceEventsCount(String jobName, Date startTime, Date endTime) {
-        Map<String, Object> resutlMap = jdbcTemplate.queryForMap(QUERY_JOB_STATUS_SQL, jobName, startTime, endTime);
+       // Map<String, Object> resutlMap = jdbcTemplate.queryForMap(QUERY_JOB_STATUS_SQL, jobName, startTime, endTime);
+        int statusCount = statusTraceLogMapper.getJobStatusTraceEventsCount(jobName,startTime,endTime);
         // 查询数据库是否有job status info
-        return resutlMap.size();
+        return statusCount;
     }
 
     private class DaemonThreadFactory implements ThreadFactory {

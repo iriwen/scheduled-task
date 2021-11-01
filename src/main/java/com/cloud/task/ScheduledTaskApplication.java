@@ -1,5 +1,6 @@
 package com.cloud.task;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootApplication
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @ServletComponentScan
+@MapperScan(basePackages = "com.cloud.task.mapper")
 @Slf4j
 public class ScheduledTaskApplication {
 
