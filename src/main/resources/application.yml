@@ -2,9 +2,9 @@ spring:
   application:
     name: scheduled-task
   datasource:
-    url: jdbc:mysql://192.168.100.101:3306/scheduled-task?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/scheduled-task?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
     username: root
-    password: 111
+    password: 123456
     initial-size: 10
     driver-class-name: com.mysql.jdbc.Driver
     min-idle: 5
